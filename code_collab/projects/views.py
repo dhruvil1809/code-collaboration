@@ -61,7 +61,7 @@ def update_project(request, pk):
         project.description = description
         project.save()
 
-        return redirect('home')
+        return redirect('project_list')
 
     return render(request, 'accounts/home.html', {'project': project})
 
