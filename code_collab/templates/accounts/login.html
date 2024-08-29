@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/login.css' %}">
+      <title>Login</title>
+   </head>
+   <body>
+      <main class="container">
+         <h1>
+            sign in to
+            <span class="U_letter">C</span>ode<span class="U_letter">C</span>ollab
+         </h1>
+         <section class="form_section">
+            <form action="{% url 'login' %}" method="post">
+               {% csrf_token %}
+               <label for="username">username</label>
+               <input type="text" name="username" id="username" required/>
+               <label for="password">password</label>
+               <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  autocomplete="on"
+                  required
+                  />
+               {% if error_message %}
+               <p style="margin-top: -10px;color: red;font-size: small;margin-bottom: 7px;">{{ error_message }}</p>
+               {% endif %}
+               <button type="submit">sign in</button>
+            </form>
+         </section>
+         <section class="register">
+            <span
+               >new to <span class="U_letter">C</span>ode<span class="U_letter">C</span>ollab? <a href="{% url 'register' %}">Sign up</a></span
+               >
+         </section>
+      </main>
+   </body>
+</html>

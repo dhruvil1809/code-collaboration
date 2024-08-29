@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/login.css' %}">
+      <title>Register</title>
+   </head>
+   <body>
+      <main class="container">
+         <h1>
+            Sign up to
+            <span class="U_letter">C</span>ode<span class="U_letter">C</span>ollab
+         </h1>
+         <section class="form_section">
+            <form action="{% url 'register' %}" method="post">
+               {% csrf_token %}
+               <label for="username">Username</label>
+               <input type="text" name="username" id="username" required/>
+               {% if errors.username_exists %}
+               <p style="margin-top: -10px;color: red;font-size: small;margin-bottom: 7px;">{{ errors.username_exists }}</p>
+               {% endif %}
+               <label for="email">Email</label>
+               <input type="email" name="email" id="email" required/>
+               {% if errors.email_exists %}
+               <p style="margin-top: -10px;color: red;font-size: small;margin-bottom: 7px;">{{ errors.email_exists }}</p>
+               {% endif %}
+               <label for="password">Password</label>
+               <input
+                  type="password"
+                  name="password1"
+                  id="password"
+                  autocomplete="on"
+                  required
+                  />
+               <label for="password2">Confirm Password</label>
+               <input
+                  type="password"
+                  name="password2"
+                  id="password2"
+                  autocomplete="on"
+                  required
+                  />
+               {% if errors.password_mismatch %}
+               <p style="margin-top: -10px;color: red;font-size: small;margin-bottom: 7px;">{{ errors.password_mismatch }}</p>
+               {% endif %}
+               <button type="submit">Sign up</button>
+            </form>
+         </section>
+         <section class="register">
+            <span>
+            Already have an account? <a href="{% url 'login' %}">Sign in</a>
+            </span>
+         </section>
+      </main>
+   </body>
+</html>

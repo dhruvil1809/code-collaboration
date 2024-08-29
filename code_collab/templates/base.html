@@ -1,0 +1,71 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      {% block head %}
+      {% endblock %}
+   </head>
+   <body>
+      {% if user.is_authenticated %}
+      <nav class="navbar custom-navbar-expand navbar-light bg-light">
+         <div class="container-fluid">
+            <a class="navbar-brand" href="/" style="font-size: x-large;">CodeCollab</a>
+            <button style="border: 1px solid #8b949e;padding: 9px 16px;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <ul style="display: contents;" class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'project_list' %}">All Projects</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'current_user_project_list' %}">Your Projects</a>
+                  </li>
+               </ul>
+               <ul class="navbar-nav ms-auto">
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'login' %}">Sign In</a>
+                  </li>
+                  {% endif %}
+               </ul>
+            </div>
+         </div>
+      </nav>
+      {% block content %}
+      {% endblock %}
+      {% block extra_js %}
+      {% endblock %}
+      {% else %}
+      <div class="navbar">
+         <div>
+            <a style="font-size: x-large;" href="/">CodeCollab</a>
+         </div>
+         <div class="right-nav">
+            <a href="{% url 'login' %}">Sign in</a>
+            <a class="home-nav-signup" href="{% url 'register' %}">Sign up</a>
+         </div>
+      </div>
+      <div class="home-content-box">
+         <div class="home-content-div">
+            <h2 class="home-content-h2" data-aos="fade-up" data-aos-duration="1000">Collaborate in Real-Time</h2>
+            <p class="home-content-p" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
+               Join our online code collaboration platform where you and your team can work together seamlessly on the same code file. Experience instant updates, real-time changes, and stay in sync with every keystroke. Whether you're
+               debugging, writing new features, or brainstorming, our platform ensures everyone is on the same page.
+            </p>
+            <a data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" href="{% url 'login' %}" class="create-gist">Get Started</a>
+         </div>
+      </div>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+         AOS.init();
+      </script>
+      {% endif %}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   </body>
+</html>

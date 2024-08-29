@@ -1,0 +1,58 @@
+.container2 {
+    display: flex;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.main-content {
+    flex: 3;
+    padding-right: 20px;
+}
+
+.version-history {
+    border-left: 1px solid #c9d1d9;
+    padding-left: 20px;
+    overflow: scroll;
+    max-height: 77vh;
+    overflow-x: hidden;
+}
+
+.file-name {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.path{
+    text-decoration: none;
+    color: #54a1e9;
+}
+.path:hover{
+    text-decoration: underline;
+    color: #54a1e9;
+}
+.edit-button {
+    color: #c9d1d9;
+}
+.back{
+    color: #c9d1cd;
+    margin-left: 20px;
+    text-decoration: none;
+    border: 1px solid #8b949e;
+    padding: 7px;
+    border-radius: 7px;
+}
+.save-btn{
+    border: 1px solid #8b949e;
+    background-color: #0d111700;
+    color: #c9d1cd;
+    padding: 5px;
+    width: 60px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    .file-name {
+        flex-direction: column;
+    }
+}

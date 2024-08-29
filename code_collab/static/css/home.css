@@ -1,0 +1,390 @@
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    padding: 13px 20px;
+    background-color: #161b22 !important;
+}
+.fa-bars:before {
+    content: "\f0c9";
+    color: #8b949e;
+    font-size: 20px;
+}
+.navbar a {
+    color: #c9d1d9;
+    text-decoration: none;
+    margin: 0 10px;
+}
+.navbar a:hover{
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+.navbar .right-nav {
+    display: flex;
+    align-items: center;
+}
+.navbar .right-nav img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.no-gists {
+    margin-top: 40px;
+    font-size: 18px;
+}
+.create-gist {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #2ea043;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.home-nav-signup{
+    border: 1px solid #8b949e;
+    padding: 6px 8px;
+    border-radius: 5px;
+}
+
+.home-content-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:50vh
+}
+
+.home-content-div{
+    padding:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.home-content-h2{
+    font-size: 48px;
+    color: #3fb950;
+    line-height: 52px !important;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+.home-content-p{
+    max-width: 1000px;
+    font-size: 22px;
+}
+
+
+
+.repo-list {
+    list-style: none;
+    padding: 0;
+}
+.repo-item {
+    position: relative;
+    background-color: #161b22;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+.repo-name {
+    font-size: 18px;
+    color: #58a6ff;
+    text-decoration: none;
+}
+.repo-name:hover {
+    font-size: 18px;
+    color: #58a6ff;
+    text-decoration: underline;
+}
+.repo-language {
+    color: #8b949e;
+    font-size: 14px;
+}
+.repo-updated {
+    color: #8b949e;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+
+.delete-icon {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    color: #8b949e;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.delete-icon:hover {
+    color: #ff6b6b;
+}
+.update-icon {
+    position: absolute;
+    bottom: 15px;
+    right: 45px;
+    color: #8b949e;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.update-icon:hover {
+    color: #ffffff;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    width: 79%;
+    padding: 8px;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+}
+
+.search-bar::placeholder {
+    color: #8b949e;
+}
+
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+.new-button {
+    background-color: #238636;
+    color: #ffffff;
+    border: none;
+    padding: 9px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.new-button:hover {
+    background-color: #2ea043;
+}
+
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: rgba(22, 27, 34, 255);
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid rgba(45, 51, 58, 255);
+    width: 80%;
+    max-width: 600px; /* Max width for modal */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 17px;
+    top: 4px;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(190, 190, 190);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form Styling */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content input[type="number"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: rgba(13, 17, 22, 255);
+    color: rgba(230, 237, 243, 255);
+    border: 1px solid rgba(45, 51, 58, 255);
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content input[type="date"]:focus,
+.modal-content input[type="number"]:focus {
+    border-color: #1e1e1e;
+    outline: none;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2ea043;
+    color: rgba(255, 255, 255, 255);
+    border: 1px solid #2ea043;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #2ea043e0;
+    transform: scale(1.05);
+}
+
+
+/* Additional button styles for the delete modal */
+.modal-content #confirmDelete {
+    background-color: #d9534f;
+}
+
+.modal-content #confirmDelete:hover {
+    background-color: #c9302c;
+}
+
+
+
+@media (min-width: 800px) {
+    .custom-navbar-expand {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+    .custom-navbar-expand .navbar-collapse {
+      display: flex !important;
+      flex-basis: auto;
+    }
+    .custom-navbar-expand .navbar-toggler {
+      display: none;
+    }
+  }
+
+@media only screen and (max-width: 798px) {
+    .navbar .right-nav img {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .home-content-box {
+        height: auto;
+        padding: 20px 0;
+    }
+    .home-content-h2 {
+        font-size: 36px;
+        line-height: 40px !important;
+    }
+    .home-content-p {
+        font-size: 18px;
+    }
+    .container {
+        padding: 10px;
+    }
+    .modal-content {
+        width: 90%;
+        margin: 20% auto;
+        padding: 15px;
+    }
+    .repo-item {
+        padding: 12px;
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .search-bar {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .header-buttons {
+        gap: 5px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .update-icon{
+        bottom: 10px;
+        right: 35px;
+    }
+
+    .delete-icon {
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+/* Tablet Styles */
+@media only screen and (max-width: 768px) {
+    .home-content-h2 {
+        font-size: 42px;
+        line-height: 46px !important;
+    }
+    .home-content-p {
+        font-size: 20px;
+    }
+    .header-buttons {
+        gap: 8px;
+    }
+    .modal-content {
+        width: 85%;
+    }
+    .repo-item {
+        padding: 14px;
+    }
+    .update-icon{
+        bottom: 10px;
+        right: 37px;
+    }
+
+    .delete-icon {
+        bottom: 10px;
+        right: 12px;
+    }
+}
+
