@@ -86,7 +86,7 @@ code collaboration platform where you and your team can work together seamlessly
 - [Real-Time Code Editing](#real-time-code-editing)
 - [Version Control](#version-control)
 - [User Interface](#user-interface)
-- [Troubleshooting](#troubleshooting)
+- [Troubleshooting](#troubleshooting-and-support)
 
 ## Getting Started
 
@@ -121,6 +121,8 @@ code collaboration platform where you and your team can work together seamlessly
 2. **Viewing Projects**
 
 - Navigate to home page: Click on the project name to view its details.
+- Add File: Click on `Add File` button and fill filename and create file.
+- Rename and Delete File: Cilck on Dots icon for rename and delete file.
 - Explore Files: Click on individual files to view their contents.
 
 3. **Updating a Project**
