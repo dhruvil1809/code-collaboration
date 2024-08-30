@@ -86,7 +86,7 @@ code collaboration platform where you and your team can work together seamlessly
 - [Real-Time Code Editing](#real-time-code-editing)
 - [Version Control](#version-control)
 - [User Interface](#user-interface)
-- [Troubleshooting](#troubleshooting-and-support)
+- [Troubleshooting](#troubleshooting)
 
 ## Getting Started
 
