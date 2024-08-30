@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 from projects.models import Project
+from django.contrib.auth import authenticate
 
 class AccountsTestCase(TestCase):
 
@@ -11,11 +12,11 @@ class AccountsTestCase(TestCase):
         self.login_url = reverse('login')
         self.logout_url = reverse('logout')
         self.home_url = reverse('home')
+        self.verify_email_url = reverse('verify_email')
+        self.reset_password_url = reverse('reset_password', kwargs={'email': 'testuser@example.com'})
         
         self.user = User.objects.create_user(username='testuser', email='testuser@example.com', password='testpassword')
-        
         self.project = Project.objects.create(name='Test Project', user=self.user)
-
 
     def test_register_success(self):
         response = self.client.post(self.register_url, {
@@ -90,4 +91,38 @@ class AccountsTestCase(TestCase):
     def test_home_view_unauthenticated(self):
         response = self.client.get(self.home_url)
         self.assertEqual(response.status_code, 200)
-        self.assertNotContains(response, 'Test Project') 
+        self.assertNotContains(response, 'Test Project')
+
+    def test_verify_email_success(self):
+        response = self.client.post(self.verify_email_url, {
+            'email': 'testuser@example.com',
+        })
+        self.assertEqual(response.status_code, 302)  # Redirect to reset password
+        self.assertRedirects(response, reverse('reset_password', kwargs={'email': 'testuser@example.com'}))
+
+    def test_verify_email_not_found(self):
+        response = self.client.post(self.verify_email_url, {
+            'email': 'nonexistent@example.com',
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Email not found")
+
+    def test_reset_password_success(self):
+        response = self.client.post(self.reset_password_url, {
+            'password': 'newpassword',
+            'password2': 'newpassword',
+        })
+        self.assertEqual(response.status_code, 302)  # Redirect to login
+        self.assertRedirects(response, reverse('login'))
+
+        # Verify password change
+        self.user = authenticate(username='testuser', password='newpassword')
+        self.assertIsNotNone(self.user)
+
+    def test_reset_password_mismatch(self):
+        response = self.client.post(self.reset_password_url, {
+            'password': 'newpassword',
+            'password2': 'differentpassword',
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Passwords do not match")

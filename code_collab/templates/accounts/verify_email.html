@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'css/login.css' %}">
+      <title>Vreify Email</title>
+   </head>
+   <body>
+      <main class="container">
+         <h1>
+            Vreify your email
+         </h1>
+         <section class="form_section">
+            <form action="{% url 'verify_email' %}" method="post">
+               {% csrf_token %}
+               <label for="email">email (registered)</label>
+               <input type="text" name="email" id="email" required/>
+               {% if error_message %}
+               <p style="margin-top: -10px;color: red;font-size: small;margin-bottom: 7px;">{{ error_message }}</p>
+               {% endif %}
+               <button type="submit">Verify</button>
+            </form>
+         </section>
+         <section class="register">
+               Already have an account? <a href="{% url 'login' %}">Sign in</a>
+         </section>
+      </main>
+   </body>
+</html>

@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate,login, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from projects.models import Project
+from django.urls import reverse
 
 def register(request):
     errors = {}
@@ -40,6 +41,36 @@ def user_login(request):
             error_message = "Invalid username or password" 
 
     return render(request, 'accounts/login.html', {'error_message': error_message})
+
+def verify_email(request):
+    error_message = None
+    if request.method == 'POST':
+        email = request.POST.get('email')
+
+        if User.objects.filter(email=email).exists():
+            reset_password_url = reverse('reset_password', kwargs={'email': email})
+            return redirect(reset_password_url)
+        else:
+            error_message = "Email not found"
+
+    return render(request, 'accounts/verify_email.html', {'error_message': error_message})
+
+def reset_password(request, email):
+    error_message = None
+    user = User.objects.get(email=email)
+
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        password2 = request.POST.get('password2')
+
+        if password != password2:
+            error_message = "Passwords do not match"
+        else:
+            user.set_password(password)
+            user.save()
+            return redirect('login')
+    
+    return render(request, 'accounts/reset_password.html', {'email': email,'error_message': error_message})
 
 def logout_view(request):
     logout(request)
