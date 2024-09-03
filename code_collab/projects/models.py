@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class Project(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='owned_projects', on_delete=models.CASCADE)
+    collaborators = models.ManyToManyField(User, related_name='collaborating_projects', blank=True)
     created = models.DateTimeField(auto_now_add=True) 
     updated = models.DateTimeField(auto_now=True)
 
@@ -35,3 +36,5 @@ class FileVersion(models.Model):
 
     def __str__(self):
         return f"Version {self.id} of file {self.file.name}"
+    
+

@@ -14,7 +14,7 @@
 .version-history {
     border-left: 1px solid #c9d1d9;
     padding-left: 20px;
-    overflow: scroll;
+    overflow: auto !important;
     max-height: 77vh;
     overflow-x: hidden;
     flex: 1;

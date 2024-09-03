@@ -108,62 +108,66 @@ code collaboration platform where you and your team can work together seamlessly
 
 4. **Logging Out**
 
-- Logout: Click on `Logout` link in navbar for logout.
+- **Logout**: Click on `Logout` link in navbar for logout.
 
 ## Project Management
 
 1. **Creating a New Project**
 
-- Navigate to the home page: Click on `Create a Project`.
-- Fill in Project Details: Enter the project name and description.
-- Create Project: Click `Create` to initialize your new project.
+- **Navigate to the home page**: Click on `Create a Project`.
+- **Fill in Project Details**: Enter the project name and description.
+- **Create Project**: Click `Create` to initialize your new project.
 
 2. **Viewing Projects**
 
-- Navigate to home page: Click on the project name to view its details.
-- Add File: Click on `Add File` button and fill filename and create file.
-- Rename and Delete File: Cilck on Dots icon for rename and delete file.
-- Explore Files: Click on individual files to view their contents.
+- **Navigate to home page**: Click on the project name to view its details.
+- **Add File**: Click on `Add File` button and fill filename and create file.
+- **Rename and Delete File**: Cilck on Dots icon for rename and delete file.
+- **Explore Files**: Click on individual files to view their contents.
 
-3. **Updating a Project**
+3. **Collaborators**
 
-- Select Project: Go to the project you want to update.
-- Edit Details: Click "Edit" icon to modify the project name or description.
-- Save Changes: Click `Update` to apply the updates.
+- **Add and Remove Collaborators**: Manage collaborators by adding or removing them from the project.
 
-4. **Deleting a Project**
+4. **Updating a Project**
 
-- Select Project: Go to the project you wish to delete.
-- Delete: Click "Delete" icon and confirm to remove the project permanently.
+- **Select Project**: Go to the project you want to update.
+- **Edit Details**: Click "Edit" icon to modify the project name or description.
+- **Save Changes**: Click `Update` to apply the updates.
+
+5. **Deleting a Project**
+
+- **Select Project**: Go to the project you wish to delete.
+- **Delete**: Click "Delete" icon and confirm to remove the project permanently.
 
 ## Real-Time Code Editing
 
 1. **Accessing the Code Editor**
 
-- Open a Project: Navigate to the project containing the file you want to edit.
-- Open File: Click on the file name to open it.
-- Edit File: Click on the "Edit" icon to open it in the real-time code editor.
+- **Open a Project**: Navigate to the project containing the file you want to edit.
+- **Open File**: Click on the file name to open it.
+- **Edit File**: Click on the "Edit" icon to open it in the real-time code editor.
 
 2. **Collaborating in Real-Time**
 
-- Multiple Editors: Invite collaborators to edit the same file.
-- Live Updates: See changes made by others in real-time.
+- **Multiple Editors**: Invite collaborators to edit the same file.
+- **Live Updates**: See changes made by others in real-time.
 
 3. **Saving Changes**
 
-- Save File: Click the `Save` button to save your changes.
+- **Save File**: Click the `Save` button to save your changes.
 
 ## Version Control
 
 1. **Viewing Version History**
 
-- Open a File: Navigate to the file within the project.
-- View History: Click on the file name to open it.
+- **Open a File**: Navigate to the file within the project.
+- **View History**: Click on the file name to open it.
 
 2. **Reverting to a Previous Version**
 
-- view: Go to the version you wish to view and click on `View`.
-- Revert: Click `Revert` to restore the selected version.
+- **view**: Go to the version you wish to view and click on `View`.
+- **Revert**: Click `Revert` to restore the selected version.
 
 ## User Interface
 

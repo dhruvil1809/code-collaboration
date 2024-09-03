@@ -192,6 +192,99 @@ body {
 
 
 
+
+
+.container2 {
+    display: flex;
+    margin: 0 auto;
+    padding: 20px;
+    flex-wrap: wrap; /* Allow flex items to wrap */
+}
+
+.main-content {
+    flex: 3;
+    padding-right: 20px;
+    max-width: 100%; /* Ensure it doesn’t exceed the container */
+}
+
+.version-history {
+    border-left: 1px solid #c9d1d9;
+    padding-left: 20px;
+    overflow: auto !important;
+    max-height: 77vh;
+    overflow-x: hidden;
+    flex: 1;
+    max-width: 100%; /* Ensure it doesn’t exceed the container */
+    margin-top: 28px;
+}
+
+.file-name {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.path{
+    text-decoration: none;
+    color: #54a1e9;
+}
+.path:hover{
+    text-decoration: underline;
+    color: #54a1e9;
+}
+.edit-button {
+    color: #c9d1d9;
+}
+
+.back {
+    position:absolute;
+    margin-top: 12px;
+    color: #c9d1cd;
+    text-decoration: none;
+    border: 1px solid #8b949e;
+    padding: 7px;
+    border-radius: 7px;
+}
+
+.add-people{
+    margin-left: 35px;
+    text-decoration: underline;
+    color: #58a6ff;
+    display: flex;
+    align-items: center;
+}
+.add-people:hover {
+    margin-left: 35px;
+    text-decoration: underline;
+    color: #8bc1ff;
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 1060px) {
+    .container2 {
+        flex-direction: column; /* Stack items vertically */
+    }
+    .main-content {
+        padding-right: 0; /* Remove right padding */
+        padding-bottom: 20px; /* Add bottom padding for spacing */
+    }
+
+    .version-history {
+        border-left: none; /* Remove left border on small screens */
+        padding-left: 0; /* Remove left padding */
+        max-height: none; /* Allow full height */
+        overflow: visible; /* Show full content */
+    }
+}
+
+@media (max-width: 600px) {
+    .file-name {
+        flex-direction: column;
+    }
+}
+
+
 /* Responsive styles */
 @media (max-width: 768px) {
     .repo-name1 {

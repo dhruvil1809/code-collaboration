@@ -60,3 +60,26 @@ class ProjectFileTests(TestCase):
         response = self.client.get(reverse('current_user_project_list'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.project.name)
+
+    def test_add_collaborator(self):
+        new_user = User.objects.create_user(username='newuser', password='password')
+        response = self.client.post(reverse('add_collaborator', args=[self.project.pk]), {'username': 'newuser'})
+        self.assertRedirects(response, reverse('project_detail', args=[self.project.pk]))
+        self.assertIn(new_user, self.project.collaborators.all())
+
+    def test_add_collaborator_duplicate(self):
+        new_user = User.objects.create_user(username='newuser', password='password')
+        self.project.collaborators.add(new_user)
+        response = self.client.post(reverse('add_collaborator', args=[self.project.pk]), {'username': 'newuser'})
+        self.assertContains(response, "User is already a collaborator", status_code=200)
+
+    def test_add_collaborator_nonexistent_user(self):
+        response = self.client.post(reverse('add_collaborator', args=[self.project.pk]), {'username': 'nonexistent'})
+        self.assertContains(response, "User does not exist", status_code=200)
+
+    def test_remove_collaborator(self):
+        new_user = User.objects.create_user(username='newuser', password='password')
+        self.project.collaborators.add(new_user)
+        response = self.client.post(reverse('remove_collaborator', args=[self.project.pk, new_user.pk]))
+        self.assertRedirects(response, reverse('project_detail', args=[self.project.pk]))
+        self.assertNotIn(new_user, self.project.collaborators.all())

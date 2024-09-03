@@ -77,5 +77,21 @@ def logout_view(request):
     return redirect('home')
 
 def home(request):
-    projects = Project.objects.all()
+
+    try:
+        user = request.user
+        
+        # Filter projects where the user is either the owner or a collaborator
+        owned_projects = Project.objects.filter(user=user)
+        collaborated_projects = Project.objects.filter(collaborators=user)
+        
+        # Combine the two QuerySets and remove duplicates
+        projects = owned_projects | collaborated_projects
+        projects = projects.distinct()
+    
+    except Exception as e:
+        projects = Project.objects.all()
+
+        return render(request, 'accounts/home.html', {'projects': projects})
+    
     return render(request, 'accounts/home.html', {'projects': projects})

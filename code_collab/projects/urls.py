@@ -9,6 +9,10 @@ urlpatterns = [
     path('<int:pk>/update', views.update_project, name='update_project'),
     path('<int:pk>/delete', views.delete_project, name='delete_project'),
     path('<int:pk>/', views.project_detail, name='project_detail'),
+    path('<int:project_pk>/add-collaborator/', views.add_collaborator, name='add_collaborator'),
+    path('<int:project_pk>/remove-collaborator/<int:user_pk>/', views.remove_collaborator, name='remove_collaborator'),
+
+
 
     # File management URLs
     path('file/create/<int:project_pk>', views.create_file, name='create_file'),

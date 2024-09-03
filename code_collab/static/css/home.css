@@ -362,11 +362,11 @@ body {
 /* Tablet Styles */
 @media only screen and (max-width: 768px) {
     .home-content-h2 {
-        font-size: 42px;
+        font-size: 35px;
         line-height: 46px !important;
     }
     .home-content-p {
-        font-size: 20px;
+        font-size: 17px;
     }
     .header-buttons {
         gap: 8px;

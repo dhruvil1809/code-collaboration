@@ -11,83 +11,118 @@
 <link rel="stylesheet" href="{% static 'css/project_detail.css' %}" />
 {% endblock %}
 {% block content %}
-<div class="container">
-   <!-- Add File Modal -->
-   <div id="AddFileModel" class="modal">
-      <div class="modal-content">
-         <span class="close" id="closeAddFileModel">&times;</span>
-         <h2 style="margin-bottom:10px;">Add File</h2>
-         <form id="AddFileForm" action="{% url 'create_file' project_pk=project.pk %}" method="POST">
-            {% csrf_token %}
-            <label for="Name">Name:</label>
-            <input type="text" id="Name" name="name" value="{{ modal_data.name|default:'' }}" required>
-            <button type="submit">Create</button>
-         </form>
-      </div>
-   </div>
-   <!-- Header -->
-   <header class="repo-header">
-      <div class="repo-name1">
-         <span class="repo-icon">📂</span> {{ project.name }}
-      </div>
-      <div class="actions">
-         <button class="new-button">Add File</button>
-      </div>
-   </header>
-   <!-- File List -->
-   {% if project.files.exists %}
-   {% for file in project.files.all %}
-   <table class="file-list">
-      <tr class="file-item">
-         <td class="file-name"><a href="{% url 'file_detail' file.pk %}">{{ file.name }}</a></td>
-         <td class="file-commit">Updated {{ file.updated|naturaltime }}</td>
-         <td class="file-actions">
-            <div class="dropdown">
-               <span class="dots-icon" onclick="toggleDropdown({{ file.id }})">&#x22EE;</span>
-               <div id="dropdownMenu-{{ file.id }}" class="dropdown-menu">
-                  <button data-id="{{ file.id }}" class="dropdown-item">Rename</button>
-                  <button data-id="{{ file.id }}" class="dropdown-item1">Delete</button>
-               </div>
+<div class="container2">
+   <div class="main-content">
+
+    <div class="container">
+        <!-- Add File Modal -->
+        <div id="AddFileModel" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAddFileModel">&times;</span>
+                <h2 style="margin-bottom:10px;">Add File</h2>
+                <form id="AddFileForm" action="{% url 'create_file' project_pk=project.pk %}" method="POST">
+                    {% csrf_token %}
+                    <label for="Name">Name:</label>
+                    <input type="text" id="Name" name="name" value="{{ modal_data.name|default:'' }}" required>
+                    <button type="submit">Create</button>
+                </form>
             </div>
-         </td>
-      </tr>
-   </table>
-   <!-- Rename File Modal -->
-   <div id="RenameFileModel-{{ file.id }}" class="modal">
-      <div class="modal-content">
-         <span class="close" id="closeRenameFileModel-{{ file.id }}">&times;</span>
-         <h2 style="margin-bottom:10px;">Rename File</h2>
-         <form id="RenameFileModelForm-{{ file.id }}" action="{% url 'update_file' file.pk %}" method="POST">
-            {% csrf_token %}
-            <label for="Name-{{ file.id }}">Name:</label>
-            <input type="text" id="Name-{{ file.id }}" name="name" value="{{ modal_data.name|default:file.name }}" required>
-            <button type="submit">Update</button>
-         </form>
-      </div>
+        </div>
+
+        <!-- Add Collaborator Modal -->
+        <div id="AddCollaboratorModel" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAddCollaboratorModel">&times;</span>
+                <h2 style="margin-bottom:10px;">Add Collaborator</h2>
+                <form id="AddCollaboratorForm" action="{% url 'add_collaborator' project_pk=project.pk %}" method="POST">
+                    {% csrf_token %}
+                    <label for="Name">Collaborator username:</label>
+                    <input type="text" id="username" name="username" value="{{ modal_data.username|default:'' }}" required>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+        </div>
+        <!-- Header -->
+        <header class="repo-header">
+            <div class="repo-name1">
+                <span class="repo-icon">📂</span> {{ project.name }}
+            </div>
+            <div class="actions">
+                <button class="new-button">Add File</button>
+            </div>
+        </header>
+        <!-- File List -->
+        {% if project.files.exists %}
+        {% for file in project.files.all %}
+        <table class="file-list">
+            <tr class="file-item">
+                <td class="file-name"><a href="{% url 'file_detail' file.pk %}">{{ file.name }}</a></td>
+                <td class="file-commit">Updated {{ file.updated|naturaltime }}</td>
+                <td class="file-actions">
+                    <div class="dropdown">
+                    <span class="dots-icon" onclick="toggleDropdown({{ file.id }})">&#x22EE;</span>
+                    <div id="dropdownMenu-{{ file.id }}" class="dropdown-menu">
+                        <button data-id="{{ file.id }}" class="dropdown-item">Rename</button>
+                        <button data-id="{{ file.id }}" class="dropdown-item1">Delete</button>
+                    </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <!-- Rename File Modal -->
+        <div id="RenameFileModel-{{ file.id }}" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeRenameFileModel-{{ file.id }}">&times;</span>
+                <h2 style="margin-bottom:10px;">Rename File</h2>
+                <form id="RenameFileModelForm-{{ file.id }}" action="{% url 'update_file' file.pk %}" method="POST">
+                    {% csrf_token %}
+                    <label for="Name-{{ file.id }}">Name:</label>
+                    <input type="text" id="Name-{{ file.id }}" name="name" value="{{ modal_data.name|default:file.name }}" required>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+        <!-- Delete File Modal -->
+        <div id="deleteModal-{{ file.id }}" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeDeleteModal-{{ file.id }}">&times;</span>
+                <h2 style="margin-bottom:10px;">Delete File</h2>
+                <p>Are you sure you want to delete <b>"{{ file.name }}"</b> File?</p>
+                <form style="display: inline-block;" id="deleteForm-{{ file.id }}" method="POST" action="{% url 'delete_file' file.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="uuid" id="deleteUUID-{{ file.id }}" value="{{ file.pk }}">
+                    <button style="background-color: #c9302c;border: 1px solid #d9534f;" type="submit" id="confirmDelete-{{ file.id }}">Yes</button>
+                    <button style="margin-left: 5px;" type="button" class="close2" >No</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No files available.</p>
+        {% endif %}
+        <!-- Readme Section -->
+        <div class="readme">
+            <h3>Description:</h3>
+            <p>{{ project.description }}</p>
+        </div>
+    </div>
    </div>
-   <!-- Delete File Modal -->
-   <div id="deleteModal-{{ file.id }}" class="modal">
-      <div class="modal-content">
-         <span class="close" id="closeDeleteModal-{{ file.id }}">&times;</span>
-         <h2 style="margin-bottom:10px;">Delete File</h2>
-         <p>Are you sure you want to delete <b>"{{ file.name }}"</b> File?</p>
-         <form style="display: inline-block;" id="deleteForm-{{ file.id }}" method="POST" action="{% url 'delete_file' file.pk %}">
-            {% csrf_token %}
-            <input type="hidden" name="uuid" id="deleteUUID-{{ file.id }}" value="{{ file.pk }}">
-            <button style="background-color: #c9302c;border: 1px solid #d9534f;" type="submit" id="confirmDelete-{{ file.id }}">Yes</button>
-            <button style="margin-left: 5px;" type="button" class="close2" >No</button>
-         </form>
-      </div>
+
+   <div class="version-history">
+        <div style="display: flex;" class="Collaborators">
+            <h4>Collaborators</h4>
+            <a class="add-people" href="#">Add People</a>
+        </div>
+        <ul>
+        {% for collaborator in collaborators %}
+            <li style="margin-right: 35px;">
+                <a style="color: #54a1e9;text-decoration: none;" href="#">{{ collaborator.username }}</a> | 
+                <a style="color: #54a1e9;text-decoration: none;" href="{% url 'remove_collaborator' project.pk collaborator.pk %}" onclick="confirmRemoveCollaborator(event, '{{ collaborator.username }}')">Remove</a>
+            </li>
+        {% endfor %}
+        </ul>
    </div>
-   {% endfor %}
-   {% else %}
-   <p>No files available.</p>
-   {% endif %}
-   <!-- Readme Section -->
-   <div class="readme">
-      <h3>Description:</h3>
-      <p>{{ project.description }}</p>
-   </div>
+
 </div>
 {% endblock %}
 {% block extra_js %}
@@ -97,6 +132,7 @@
        var deleteModals = document.querySelectorAll(".modal[id^='deleteModal-']");
        var RenameFileModel = document.querySelectorAll(".modal[id^='RenameFileModel-']");
        var AddFileModel = document.getElementById("AddFileModel");
+       var AddCollaboratorModel = document.getElementById("AddCollaboratorModel");
    
        // Get the <span> elements that close the modals
        var closeButtons = document.querySelectorAll(".close");
@@ -106,6 +142,7 @@
        var deleteIcons = document.querySelectorAll(".dropdown-item1");
        var RenameFileButtons = document.querySelectorAll(".dropdown-item");
        var addFileButtons = document.querySelectorAll(".new-button");
+       var addCollaboratorButtons = document.querySelectorAll(".add-people");
    
        // Function to open modals
        function openModal(modal) {
@@ -161,6 +198,14 @@
            button.addEventListener("click", function () {
                if (AddFileModel) {
                    openModal(AddFileModel);
+               }
+           });
+       });
+
+       addCollaboratorButtons.forEach(function (button) {
+           button.addEventListener("click", function () {
+               if (AddCollaboratorModel) {
+                   openModal(AddCollaboratorModel);
                }
            });
        });
@@ -246,4 +291,16 @@
    });
 </script>
 {% endif %}
+{% if error_message %}
+<script>
+    alert("{{ error_message }}");
+</script>
+{% endif %}
+<script>
+function confirmRemoveCollaborator(event, username) {
+    if (!confirm(`Are you sure you want to remove '${username}' as a collaborator?`)) {
+        event.preventDefault();
+    }
+}
+</script>
 {% endblock %}
